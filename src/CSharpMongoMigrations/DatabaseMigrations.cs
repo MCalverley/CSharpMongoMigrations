@@ -23,6 +23,11 @@ namespace CSharpMongoMigrations
         private readonly IMongoDatabase _db;
         private readonly string _collectionName = typeof(MigrationVersion).Name;
 
+        public DatabaseMigrations(IMongoDatabase db)
+        {
+            _db = db;
+        }
+
         public DatabaseMigrations(MongoUrl url)
         {
             var client = MongoClientFactory.Get(url);

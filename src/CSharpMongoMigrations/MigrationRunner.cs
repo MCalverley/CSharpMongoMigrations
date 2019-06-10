@@ -84,11 +84,12 @@ namespace CSharpMongoMigrations
         /// <summary>
         /// Creates a new instance of MigrationRunner
         /// </summary>
-        /// <param name="database">MongoDb IDatabase instance</param>
+        /// <param name="database">MongoDb IMongoDatabase instance</param>
         /// <param name="migrationAssembly">Assembly with migrations</param>
         /// <param name="factory">Factory responsible for instantiating migrations</param>
         public MigrationRunner(IMongoDatabase database, string migrationAssembly, IMigrationFactory factory = null)
         {
+            _dbMigrations = new DatabaseMigrations(database);
             _locator = new MigrationLocator(migrationAssembly, database, factory ?? new MigrationFactory());
             _migrationAssembly = migrationAssembly;
         }
